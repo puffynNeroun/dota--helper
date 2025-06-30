@@ -1,0 +1,52 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env
+*.env
+
+# macOS system files
+.DS_Store
+
+# VS Code settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# Test/coverage reports
+coverage/
+htmlcov/
+*.cover
+*.py,cover
+.cache
+.nosetests.xml
+coverage.xml
+*.log
+
+# Data files (optionally ignore if dynamic)
+#data/meta.json
+#data/heroes.json
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Compiled C extensions
+*.so
+
+# OS-generated files
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Local Python environment files
+*.pdm.toml
+*.pdm.lock
+poetry.lock
+Pipfile.lock
+
+# VS Code extensions
+*.code-workspace

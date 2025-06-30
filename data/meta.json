@@ -1,0 +1,1499 @@
+{
+  "earth_spirit": {
+    "localized_name": "Earth Spirit",
+    "roles": [
+      "Nuker",
+      "Escape",
+      "Disabler",
+      "Initiator",
+      "Durable"
+    ],
+    "winrate": 0.651,
+    "pick_rate": 0.063,
+    "ban_rate": 0.06
+  },
+  "alchemist": {
+    "localized_name": "Alchemist",
+    "roles": [
+      "Carry",
+      "Support",
+      "Durable",
+      "Disabler",
+      "Initiator",
+      "Nuker"
+    ],
+    "winrate": 0.632,
+    "pick_rate": 0.076,
+    "ban_rate": 0.084
+  },
+  "broodmother": {
+    "localized_name": "Broodmother",
+    "roles": [
+      "Carry",
+      "Pusher",
+      "Escape",
+      "Nuker"
+    ],
+    "winrate": 0.625,
+    "pick_rate": 0.032,
+    "ban_rate": 0.083
+  },
+  "venomancer": {
+    "localized_name": "Venomancer",
+    "roles": [
+      "Support",
+      "Nuker",
+      "Initiator",
+      "Pusher",
+      "Disabler"
+    ],
+    "winrate": 0.612,
+    "pick_rate": 0.152,
+    "ban_rate": 0.228
+  },
+  "lycan": {
+    "localized_name": "Lycan",
+    "roles": [
+      "Carry",
+      "Pusher",
+      "Durable",
+      "Escape"
+    ],
+    "winrate": 0.596,
+    "pick_rate": 0.052,
+    "ban_rate": 0.068
+  },
+  "marci": {
+    "localized_name": "Marci",
+    "roles": [
+      "Support",
+      "Carry",
+      "Initiator",
+      "Disabler",
+      "Escape"
+    ],
+    "winrate": 0.594,
+    "pick_rate": 0.187,
+    "ban_rate": 0.16
+  },
+  "pugna": {
+    "localized_name": "Pugna",
+    "roles": [
+      "Nuker",
+      "Pusher"
+    ],
+    "winrate": 0.592,
+    "pick_rate": 0.142,
+    "ban_rate": 0.055
+  },
+  "luna": {
+    "localized_name": "Luna",
+    "roles": [
+      "Carry",
+      "Nuker",
+      "Pusher"
+    ],
+    "winrate": 0.591,
+    "pick_rate": 0.11,
+    "ban_rate": 0.048
+  },
+  "furion": {
+    "localized_name": "Nature's Prophet",
+    "roles": [
+      "Carry",
+      "Pusher",
+      "Escape",
+      "Nuker"
+    ],
+    "winrate": 0.589,
+    "pick_rate": 0.428,
+    "ban_rate": 0.727
+  },
+  "antimage": {
+    "localized_name": "Anti-Mage",
+    "roles": [
+      "Carry",
+      "Escape",
+      "Nuker"
+    ],
+    "winrate": 0.577,
+    "pick_rate": 0.182,
+    "ban_rate": 0.513
+  },
+  "batrider": {
+    "localized_name": "Batrider",
+    "roles": [
+      "Initiator",
+      "Disabler",
+      "Escape"
+    ],
+    "winrate": 0.576,
+    "pick_rate": 0.236,
+    "ban_rate": 0.534
+  },
+  "keeper_of_the_light": {
+    "localized_name": "Keeper of the Light",
+    "roles": [
+      "Support",
+      "Nuker",
+      "Disabler"
+    ],
+    "winrate": 0.574,
+    "pick_rate": 0.061,
+    "ban_rate": 0.068
+  },
+  "enigma": {
+    "localized_name": "Enigma",
+    "roles": [
+      "Disabler",
+      "Initiator",
+      "Pusher"
+    ],
+    "winrate": 0.564,
+    "pick_rate": 0.078,
+    "ban_rate": 0.123
+  },
+  "pangolier": {
+    "localized_name": "Pangolier",
+    "roles": [
+      "Carry",
+      "Nuker",
+      "Disabler",
+      "Durable",
+      "Escape",
+      "Initiator"
+    ],
+    "winrate": 0.562,
+    "pick_rate": 0.217,
+    "ban_rate": 0.356
+  },
+  "lone_druid": {
+    "localized_name": "Lone Druid",
+    "roles": [
+      "Carry",
+      "Pusher",
+      "Durable"
+    ],
+    "winrate": 0.561,
+    "pick_rate": 0.041,
+    "ban_rate": 0.074
+  },
+  "riki": {
+    "localized_name": "Riki",
+    "roles": [
+      "Carry",
+      "Escape",
+      "Disabler"
+    ],
+    "winrate": 0.556,
+    "pick_rate": 0.09,
+    "ban_rate": 0.091
+  },
+  "night_stalker": {
+    "localized_name": "Night Stalker",
+    "roles": [
+      "Carry",
+      "Initiator",
+      "Durable",
+      "Disabler",
+      "Nuker"
+    ],
+    "winrate": 0.551,
+    "pick_rate": 0.198,
+    "ban_rate": 0.398
+  },
+  "muerta": {
+    "localized_name": "Muerta",
+    "roles": [
+      "Carry",
+      "Nuker",
+      "Disabler"
+    ],
+    "winrate": 0.55,
+    "pick_rate": 0.151,
+    "ban_rate": 0.114
+  },
+  "omniknight": {
+    "localized_name": "Omniknight",
+    "roles": [
+      "Support",
+      "Durable",
+      "Nuker"
+    ],
+    "winrate": 0.548,
+    "pick_rate": 0.084,
+    "ban_rate": 0.09
+  },
+  "juggernaut": {
+    "localized_name": "Juggernaut",
+    "roles": [
+      "Carry",
+      "Pusher",
+      "Escape"
+    ],
+    "winrate": 0.546,
+    "pick_rate": 0.218,
+    "ban_rate": 0.189
+  },
+  "faceless_void": {
+    "localized_name": "Faceless Void",
+    "roles": [
+      "Carry",
+      "Initiator",
+      "Disabler",
+      "Escape",
+      "Durable"
+    ],
+    "winrate": 0.545,
+    "pick_rate": 0.099,
+    "ban_rate": 0.113
+  },
+  "pudge": {
+    "localized_name": "Pudge",
+    "roles": [
+      "Disabler",
+      "Initiator",
+      "Durable",
+      "Nuker"
+    ],
+    "winrate": 0.542,
+    "pick_rate": 0.485,
+    "ban_rate": 0.316
+  },
+  "enchantress": {
+    "localized_name": "Enchantress",
+    "roles": [
+      "Support",
+      "Pusher",
+      "Durable",
+      "Disabler"
+    ],
+    "winrate": 0.542,
+    "pick_rate": 0.048,
+    "ban_rate": 0.061
+  },
+  "snapfire": {
+    "localized_name": "Snapfire",
+    "roles": [
+      "Support",
+      "Nuker",
+      "Disabler",
+      "Escape"
+    ],
+    "winrate": 0.542,
+    "pick_rate": 0.203,
+    "ban_rate": 0.185
+  },
+  "slark": {
+    "localized_name": "Slark",
+    "roles": [
+      "Carry",
+      "Escape",
+      "Disabler",
+      "Nuker"
+    ],
+    "winrate": 0.54,
+    "pick_rate": 0.139,
+    "ban_rate": 0.415
+  },
+  "undying": {
+    "localized_name": "Undying",
+    "roles": [
+      "Support",
+      "Durable",
+      "Disabler",
+      "Nuker"
+    ],
+    "winrate": 0.539,
+    "pick_rate": 0.49,
+    "ban_rate": 0.879
+  },
+  "lich": {
+    "localized_name": "Lich",
+    "roles": [
+      "Support",
+      "Nuker"
+    ],
+    "winrate": 0.537,
+    "pick_rate": 0.315,
+    "ban_rate": 0.156
+  },
+  "morphling": {
+    "localized_name": "Morphling",
+    "roles": [
+      "Carry",
+      "Escape",
+      "Durable",
+      "Nuker",
+      "Disabler"
+    ],
+    "winrate": 0.535,
+    "pick_rate": 0.159,
+    "ban_rate": 0.413
+  },
+  "legion_commander": {
+    "localized_name": "Legion Commander",
+    "roles": [
+      "Carry",
+      "Disabler",
+      "Initiator",
+      "Durable",
+      "Nuker"
+    ],
+    "winrate": 0.535,
+    "pick_rate": 0.269,
+    "ban_rate": 0.218
+  },
+  "skeleton_king": {
+    "localized_name": "Wraith King",
+    "roles": [
+      "Carry",
+      "Support",
+      "Durable",
+      "Disabler",
+      "Initiator"
+    ],
+    "winrate": 0.534,
+    "pick_rate": 0.251,
+    "ban_rate": 0.261
+  },
+  "monkey_king": {
+    "localized_name": "Monkey King",
+    "roles": [
+      "Carry",
+      "Escape",
+      "Disabler",
+      "Initiator"
+    ],
+    "winrate": 0.533,
+    "pick_rate": 0.21,
+    "ban_rate": 0.386
+  },
+  "bane": {
+    "localized_name": "Bane",
+    "roles": [
+      "Support",
+      "Disabler",
+      "Nuker",
+      "Durable"
+    ],
+    "winrate": 0.532,
+    "pick_rate": 0.109,
+    "ban_rate": 0.087
+  },
+  "shadow_shaman": {
+    "localized_name": "Shadow Shaman",
+    "roles": [
+      "Support",
+      "Pusher",
+      "Disabler",
+      "Nuker",
+      "Initiator"
+    ],
+    "winrate": 0.531,
+    "pick_rate": 0.68,
+    "ban_rate": 1.108
+  },
+  "clinkz": {
+    "localized_name": "Clinkz",
+    "roles": [
+      "Carry",
+      "Escape",
+      "Pusher"
+    ],
+    "winrate": 0.531,
+    "pick_rate": 0.064,
+    "ban_rate": 0.046
+  },
+  "treant": {
+    "localized_name": "Treant Protector",
+    "roles": [
+      "Support",
+      "Initiator",
+      "Durable",
+      "Disabler",
+      "Escape"
+    ],
+    "winrate": 0.531,
+    "pick_rate": 0.032,
+    "ban_rate": 0.013
+  },
+  "death_prophet": {
+    "localized_name": "Death Prophet",
+    "roles": [
+      "Carry",
+      "Pusher",
+      "Nuker",
+      "Disabler"
+    ],
+    "winrate": 0.53,
+    "pick_rate": 0.332,
+    "ban_rate": 0.851
+  },
+  "dark_seer": {
+    "localized_name": "Dark Seer",
+    "roles": [
+      "Initiator",
+      "Escape",
+      "Disabler"
+    ],
+    "winrate": 0.53,
+    "pick_rate": 0.151,
+    "ban_rate": 0.171
+  },
+  "void_spirit": {
+    "localized_name": "Void Spirit",
+    "roles": [
+      "Carry",
+      "Escape",
+      "Nuker",
+      "Disabler"
+    ],
+    "winrate": 0.53,
+    "pick_rate": 0.185,
+    "ban_rate": 0.267
+  },
+  "nyx_assassin": {
+    "localized_name": "Nyx Assassin",
+    "roles": [
+      "Disabler",
+      "Nuker",
+      "Initiator",
+      "Escape"
+    ],
+    "winrate": 0.526,
+    "pick_rate": 0.097,
+    "ban_rate": 0.137
+  },
+  "witch_doctor": {
+    "localized_name": "Witch Doctor",
+    "roles": [
+      "Support",
+      "Nuker",
+      "Disabler"
+    ],
+    "winrate": 0.525,
+    "pick_rate": 0.316,
+    "ban_rate": 0.207
+  },
+  "medusa": {
+    "localized_name": "Medusa",
+    "roles": [
+      "Carry",
+      "Disabler",
+      "Durable"
+    ],
+    "winrate": 0.524,
+    "pick_rate": 0.233,
+    "ban_rate": 0.557
+  },
+  "templar_assassin": {
+    "localized_name": "Templar Assassin",
+    "roles": [
+      "Carry",
+      "Escape"
+    ],
+    "winrate": 0.519,
+    "pick_rate": 0.268,
+    "ban_rate": 0.562
+  },
+  "skywrath_mage": {
+    "localized_name": "Skywrath Mage",
+    "roles": [
+      "Support",
+      "Nuker",
+      "Disabler"
+    ],
+    "winrate": 0.519,
+    "pick_rate": 0.156,
+    "ban_rate": 0.093
+  },
+  "lina": {
+    "localized_name": "Lina",
+    "roles": [
+      "Support",
+      "Carry",
+      "Nuker",
+      "Disabler"
+    ],
+    "winrate": 0.518,
+    "pick_rate": 0.282,
+    "ban_rate": 0.382
+  },
+  "slardar": {
+    "localized_name": "Slardar",
+    "roles": [
+      "Carry",
+      "Durable",
+      "Initiator",
+      "Disabler",
+      "Escape"
+    ],
+    "winrate": 0.517,
+    "pick_rate": 0.178,
+    "ban_rate": 0.075
+  },
+  "phoenix": {
+    "localized_name": "Phoenix",
+    "roles": [
+      "Support",
+      "Nuker",
+      "Initiator",
+      "Escape",
+      "Disabler"
+    ],
+    "winrate": 0.517,
+    "pick_rate": 0.207,
+    "ban_rate": 0.143
+  },
+  "puck": {
+    "localized_name": "Puck",
+    "roles": [
+      "Initiator",
+      "Disabler",
+      "Escape",
+      "Nuker"
+    ],
+    "winrate": 0.516,
+    "pick_rate": 0.343,
+    "ban_rate": 0.931
+  },
+  "leshrac": {
+    "localized_name": "Leshrac",
+    "roles": [
+      "Carry",
+      "Support",
+      "Nuker",
+      "Pusher",
+      "Disabler"
+    ],
+    "winrate": 0.516,
+    "pick_rate": 0.155,
+    "ban_rate": 0.167
+  },
+  "silencer": {
+    "localized_name": "Silencer",
+    "roles": [
+      "Carry",
+      "Support",
+      "Disabler",
+      "Initiator",
+      "Nuker"
+    ],
+    "winrate": 0.516,
+    "pick_rate": 0.287,
+    "ban_rate": 0.817
+  },
+  "naga_siren": {
+    "localized_name": "Naga Siren",
+    "roles": [
+      "Carry",
+      "Support",
+      "Pusher",
+      "Disabler",
+      "Initiator",
+      "Escape"
+    ],
+    "winrate": 0.516,
+    "pick_rate": 0.095,
+    "ban_rate": 0.182
+  },
+  "winter_wyvern": {
+    "localized_name": "Winter Wyvern",
+    "roles": [
+      "Support",
+      "Disabler",
+      "Nuker"
+    ],
+    "winrate": 0.516,
+    "pick_rate": 0.062,
+    "ban_rate": 0.056
+  },
+  "spectre": {
+    "localized_name": "Spectre",
+    "roles": [
+      "Carry",
+      "Durable",
+      "Escape"
+    ],
+    "winrate": 0.513,
+    "pick_rate": 0.115,
+    "ban_rate": 0.265
+  },
+  "bloodseeker": {
+    "localized_name": "Bloodseeker",
+    "roles": [
+      "Carry",
+      "Disabler",
+      "Nuker",
+      "Initiator"
+    ],
+    "winrate": 0.512,
+    "pick_rate": 0.041,
+    "ban_rate": 0.058
+  },
+  "vengefulspirit": {
+    "localized_name": "Vengeful Spirit",
+    "roles": [
+      "Support",
+      "Initiator",
+      "Disabler",
+      "Nuker",
+      "Escape"
+    ],
+    "winrate": 0.512,
+    "pick_rate": 0.422,
+    "ban_rate": 0.425
+  },
+  "dazzle": {
+    "localized_name": "Dazzle",
+    "roles": [
+      "Support",
+      "Nuker",
+      "Disabler"
+    ],
+    "winrate": 0.512,
+    "pick_rate": 0.082,
+    "ban_rate": 0.143
+  },
+  "terrorblade": {
+    "localized_name": "Terrorblade",
+    "roles": [
+      "Carry",
+      "Pusher",
+      "Nuker"
+    ],
+    "winrate": 0.512,
+    "pick_rate": 0.26,
+    "ban_rate": 0.438
+  },
+  "storm_spirit": {
+    "localized_name": "Storm Spirit",
+    "roles": [
+      "Carry",
+      "Escape",
+      "Nuker",
+      "Initiator",
+      "Disabler"
+    ],
+    "winrate": 0.511,
+    "pick_rate": 0.282,
+    "ban_rate": 0.483
+  },
+  "rattletrap": {
+    "localized_name": "Clockwerk",
+    "roles": [
+      "Initiator",
+      "Disabler",
+      "Durable",
+      "Nuker"
+    ],
+    "winrate": 0.511,
+    "pick_rate": 0.305,
+    "ban_rate": 0.269
+  },
+  "dawnbreaker": {
+    "localized_name": "Dawnbreaker",
+    "roles": [
+      "Carry",
+      "Durable"
+    ],
+    "winrate": 0.51,
+    "pick_rate": 0.455,
+    "ban_rate": 0.496
+  },
+  "beastmaster": {
+    "localized_name": "Beastmaster",
+    "roles": [
+      "Initiator",
+      "Disabler",
+      "Durable",
+      "Nuker"
+    ],
+    "winrate": 0.506,
+    "pick_rate": 0.158,
+    "ban_rate": 0.38
+  },
+  "disruptor": {
+    "localized_name": "Disruptor",
+    "roles": [
+      "Support",
+      "Disabler",
+      "Nuker",
+      "Initiator"
+    ],
+    "winrate": 0.505,
+    "pick_rate": 0.323,
+    "ban_rate": 0.229
+  },
+  "abyssal_underlord": {
+    "localized_name": "Underlord",
+    "roles": [
+      "Support",
+      "Nuker",
+      "Disabler",
+      "Durable",
+      "Escape"
+    ],
+    "winrate": 0.505,
+    "pick_rate": 0.107,
+    "ban_rate": 0.073
+  },
+  "kunkka": {
+    "localized_name": "Kunkka",
+    "roles": [
+      "Carry",
+      "Support",
+      "Disabler",
+      "Initiator",
+      "Durable",
+      "Nuker"
+    ],
+    "winrate": 0.502,
+    "pick_rate": 0.293,
+    "ban_rate": 0.416
+  },
+  "kez": {
+    "localized_name": "Kez",
+    "roles": [
+      "Carry",
+      "Escape",
+      "Disabler"
+    ],
+    "winrate": 0.5,
+    "pick_rate": 0.008,
+    "ban_rate": 0.004
+  },
+  "nevermore": {
+    "localized_name": "Shadow Fiend",
+    "roles": [
+      "Carry",
+      "Nuker"
+    ],
+    "winrate": 0.499,
+    "pick_rate": 0.483,
+    "ban_rate": 0.351
+  },
+  "axe": {
+    "localized_name": "Axe",
+    "roles": [
+      "Initiator",
+      "Durable",
+      "Disabler",
+      "Carry"
+    ],
+    "winrate": 0.498,
+    "pick_rate": 0.59,
+    "ban_rate": 0.697
+  },
+  "magnataur": {
+    "localized_name": "Magnus",
+    "roles": [
+      "Initiator",
+      "Disabler",
+      "Nuker",
+      "Escape"
+    ],
+    "winrate": 0.498,
+    "pick_rate": 0.321,
+    "ban_rate": 0.301
+  },
+  "shredder": {
+    "localized_name": "Timbersaw",
+    "roles": [
+      "Nuker",
+      "Durable",
+      "Escape"
+    ],
+    "winrate": 0.498,
+    "pick_rate": 0.217,
+    "ban_rate": 0.261
+  },
+  "ancient_apparition": {
+    "localized_name": "Ancient Apparition",
+    "roles": [
+      "Support",
+      "Disabler",
+      "Nuker"
+    ],
+    "winrate": 0.494,
+    "pick_rate": 0.233,
+    "ban_rate": 0.548
+  },
+  "bounty_hunter": {
+    "localized_name": "Bounty Hunter",
+    "roles": [
+      "Escape",
+      "Nuker"
+    ],
+    "winrate": 0.493,
+    "pick_rate": 0.069,
+    "ban_rate": 0.026
+  },
+  "invoker": {
+    "localized_name": "Invoker",
+    "roles": [
+      "Carry",
+      "Nuker",
+      "Disabler",
+      "Escape",
+      "Pusher"
+    ],
+    "winrate": 0.493,
+    "pick_rate": 0.221,
+    "ban_rate": 0.218
+  },
+  "arc_warden": {
+    "localized_name": "Arc Warden",
+    "roles": [
+      "Carry",
+      "Escape",
+      "Nuker"
+    ],
+    "winrate": 0.492,
+    "pick_rate": 0.061,
+    "ban_rate": 0.112
+  },
+  "ursa": {
+    "localized_name": "Ursa",
+    "roles": [
+      "Carry",
+      "Durable",
+      "Disabler"
+    ],
+    "winrate": 0.491,
+    "pick_rate": 0.422,
+    "ban_rate": 0.946
+  },
+  "viper": {
+    "localized_name": "Viper",
+    "roles": [
+      "Carry",
+      "Durable",
+      "Initiator",
+      "Disabler"
+    ],
+    "winrate": 0.49,
+    "pick_rate": 0.155,
+    "ban_rate": 0.24
+  },
+  "spirit_breaker": {
+    "localized_name": "Spirit Breaker",
+    "roles": [
+      "Carry",
+      "Initiator",
+      "Disabler",
+      "Durable",
+      "Escape"
+    ],
+    "winrate": 0.489,
+    "pick_rate": 0.182,
+    "ban_rate": 0.099
+  },
+  "sven": {
+    "localized_name": "Sven",
+    "roles": [
+      "Carry",
+      "Disabler",
+      "Initiator",
+      "Durable",
+      "Nuker"
+    ],
+    "winrate": 0.488,
+    "pick_rate": 0.297,
+    "ban_rate": 0.28
+  },
+  "centaur": {
+    "localized_name": "Centaur Warrunner",
+    "roles": [
+      "Durable",
+      "Initiator",
+      "Disabler",
+      "Nuker",
+      "Escape"
+    ],
+    "winrate": 0.488,
+    "pick_rate": 0.26,
+    "ban_rate": 0.146
+  },
+  "brewmaster": {
+    "localized_name": "Brewmaster",
+    "roles": [
+      "Carry",
+      "Initiator",
+      "Durable",
+      "Disabler",
+      "Nuker"
+    ],
+    "winrate": 0.487,
+    "pick_rate": 0.076,
+    "ban_rate": 0.138
+  },
+  "oracle": {
+    "localized_name": "Oracle",
+    "roles": [
+      "Support",
+      "Nuker",
+      "Disabler",
+      "Escape"
+    ],
+    "winrate": 0.487,
+    "pick_rate": 0.152,
+    "ban_rate": 0.272
+  },
+  "windrunner": {
+    "localized_name": "Windranger",
+    "roles": [
+      "Carry",
+      "Support",
+      "Disabler",
+      "Escape",
+      "Nuker"
+    ],
+    "winrate": 0.485,
+    "pick_rate": 0.34,
+    "ban_rate": 0.291
+  },
+  "queenofpain": {
+    "localized_name": "Queen of Pain",
+    "roles": [
+      "Carry",
+      "Nuker",
+      "Escape"
+    ],
+    "winrate": 0.485,
+    "pick_rate": 0.652,
+    "ban_rate": 0.91
+  },
+  "warlock": {
+    "localized_name": "Warlock",
+    "roles": [
+      "Support",
+      "Initiator",
+      "Disabler"
+    ],
+    "winrate": 0.482,
+    "pick_rate": 0.251,
+    "ban_rate": 0.149
+  },
+  "jakiro": {
+    "localized_name": "Jakiro",
+    "roles": [
+      "Support",
+      "Nuker",
+      "Pusher",
+      "Disabler"
+    ],
+    "winrate": 0.481,
+    "pick_rate": 0.532,
+    "ban_rate": 0.309
+  },
+  "ringmaster": {
+    "localized_name": "Ring Master",
+    "roles": [
+      "Support",
+      "Nuker",
+      "Escape",
+      "Disabler"
+    ],
+    "winrate": 0.48,
+    "pick_rate": 0.196,
+    "ban_rate": 0.168
+  },
+  "earthshaker": {
+    "localized_name": "Earthshaker",
+    "roles": [
+      "Support",
+      "Initiator",
+      "Disabler",
+      "Nuker"
+    ],
+    "winrate": 0.478,
+    "pick_rate": 0.226,
+    "ban_rate": 0.152
+  },
+  "life_stealer": {
+    "localized_name": "Lifestealer",
+    "roles": [
+      "Carry",
+      "Durable",
+      "Escape",
+      "Disabler"
+    ],
+    "winrate": 0.478,
+    "pick_rate": 0.245,
+    "ban_rate": 0.411
+  },
+  "rubick": {
+    "localized_name": "Rubick",
+    "roles": [
+      "Support",
+      "Disabler",
+      "Nuker"
+    ],
+    "winrate": 0.475,
+    "pick_rate": 0.419,
+    "ban_rate": 0.3
+  },
+  "hoodwink": {
+    "localized_name": "Hoodwink",
+    "roles": [
+      "Support",
+      "Nuker",
+      "Escape",
+      "Disabler"
+    ],
+    "winrate": 0.474,
+    "pick_rate": 0.097,
+    "ban_rate": 0.029
+  },
+  "dragon_knight": {
+    "localized_name": "Dragon Knight",
+    "roles": [
+      "Carry",
+      "Pusher",
+      "Durable",
+      "Disabler",
+      "Initiator",
+      "Nuker"
+    ],
+    "winrate": 0.473,
+    "pick_rate": 0.22,
+    "ban_rate": 0.142
+  },
+  "necrolyte": {
+    "localized_name": "Necrophos",
+    "roles": [
+      "Carry",
+      "Nuker",
+      "Durable",
+      "Disabler"
+    ],
+    "winrate": 0.471,
+    "pick_rate": 0.17,
+    "ban_rate": 0.266
+  },
+  "wisp": {
+    "localized_name": "Io",
+    "roles": [
+      "Support",
+      "Escape",
+      "Nuker"
+    ],
+    "winrate": 0.469,
+    "pick_rate": 0.049,
+    "ban_rate": 0.084
+  },
+  "crystal_maiden": {
+    "localized_name": "Crystal Maiden",
+    "roles": [
+      "Support",
+      "Disabler",
+      "Nuker"
+    ],
+    "winrate": 0.468,
+    "pick_rate": 0.171,
+    "ban_rate": 0.034
+  },
+  "chaos_knight": {
+    "localized_name": "Chaos Knight",
+    "roles": [
+      "Carry",
+      "Disabler",
+      "Durable",
+      "Pusher",
+      "Initiator"
+    ],
+    "winrate": 0.468,
+    "pick_rate": 0.109,
+    "ban_rate": 0.027
+  },
+  "sniper": {
+    "localized_name": "Sniper",
+    "roles": [
+      "Carry",
+      "Nuker"
+    ],
+    "winrate": 0.467,
+    "pick_rate": 0.276,
+    "ban_rate": 0.394
+  },
+  "ember_spirit": {
+    "localized_name": "Ember Spirit",
+    "roles": [
+      "Carry",
+      "Escape",
+      "Nuker",
+      "Disabler",
+      "Initiator"
+    ],
+    "winrate": 0.467,
+    "pick_rate": 0.304,
+    "ban_rate": 0.406
+  },
+  "tiny": {
+    "localized_name": "Tiny",
+    "roles": [
+      "Carry",
+      "Nuker",
+      "Pusher",
+      "Initiator",
+      "Durable",
+      "Disabler"
+    ],
+    "winrate": 0.466,
+    "pick_rate": 0.365,
+    "ban_rate": 0.303
+  },
+  "troll_warlord": {
+    "localized_name": "Troll Warlord",
+    "roles": [
+      "Carry",
+      "Pusher",
+      "Disabler",
+      "Durable"
+    ],
+    "winrate": 0.465,
+    "pick_rate": 0.086,
+    "ban_rate": 0.086
+  },
+  "razor": {
+    "localized_name": "Razor",
+    "roles": [
+      "Carry",
+      "Durable",
+      "Nuker",
+      "Pusher"
+    ],
+    "winrate": 0.462,
+    "pick_rate": 0.156,
+    "ban_rate": 0.136
+  },
+  "gyrocopter": {
+    "localized_name": "Gyrocopter",
+    "roles": [
+      "Carry",
+      "Nuker",
+      "Disabler"
+    ],
+    "winrate": 0.462,
+    "pick_rate": 0.238,
+    "ban_rate": 0.192
+  },
+  "shadow_demon": {
+    "localized_name": "Shadow Demon",
+    "roles": [
+      "Support",
+      "Disabler",
+      "Initiator",
+      "Nuker"
+    ],
+    "winrate": 0.462,
+    "pick_rate": 0.184,
+    "ban_rate": 0.16
+  },
+  "mars": {
+    "localized_name": "Mars",
+    "roles": [
+      "Carry",
+      "Initiator",
+      "Disabler",
+      "Durable"
+    ],
+    "winrate": 0.46,
+    "pick_rate": 0.326,
+    "ban_rate": 0.328
+  },
+  "obsidian_destroyer": {
+    "localized_name": "Outworld Devourer",
+    "roles": [
+      "Carry",
+      "Nuker",
+      "Disabler"
+    ],
+    "winrate": 0.458,
+    "pick_rate": 0.179,
+    "ban_rate": 0.687
+  },
+  "doom_bringer": {
+    "localized_name": "Doom",
+    "roles": [
+      "Carry",
+      "Disabler",
+      "Initiator",
+      "Durable",
+      "Nuker"
+    ],
+    "winrate": 0.457,
+    "pick_rate": 0.254,
+    "ban_rate": 0.459
+  },
+  "grimstroke": {
+    "localized_name": "Grimstroke",
+    "roles": [
+      "Support",
+      "Nuker",
+      "Disabler",
+      "Escape"
+    ],
+    "winrate": 0.456,
+    "pick_rate": 0.079,
+    "ban_rate": 0.042
+  },
+  "mirana": {
+    "localized_name": "Mirana",
+    "roles": [
+      "Carry",
+      "Support",
+      "Escape",
+      "Nuker",
+      "Disabler"
+    ],
+    "winrate": 0.455,
+    "pick_rate": 0.066,
+    "ban_rate": 0.027
+  },
+  "lion": {
+    "localized_name": "Lion",
+    "roles": [
+      "Support",
+      "Disabler",
+      "Nuker",
+      "Initiator"
+    ],
+    "winrate": 0.455,
+    "pick_rate": 0.453,
+    "ban_rate": 0.218
+  },
+  "zuus": {
+    "localized_name": "Zeus",
+    "roles": [
+      "Nuker",
+      "Carry"
+    ],
+    "winrate": 0.453,
+    "pick_rate": 0.201,
+    "ban_rate": 0.141
+  },
+  "drow_ranger": {
+    "localized_name": "Drow Ranger",
+    "roles": [
+      "Carry",
+      "Disabler",
+      "Pusher"
+    ],
+    "winrate": 0.45,
+    "pick_rate": 0.209,
+    "ban_rate": 0.317
+  },
+  "primal_beast": {
+    "localized_name": "Primal Beast",
+    "roles": [
+      "Initiator",
+      "Durable",
+      "Disabler"
+    ],
+    "winrate": 0.443,
+    "pick_rate": 0.061,
+    "ban_rate": 0.034
+  },
+  "tidehunter": {
+    "localized_name": "Tidehunter",
+    "roles": [
+      "Initiator",
+      "Durable",
+      "Disabler",
+      "Nuker",
+      "Carry"
+    ],
+    "winrate": 0.442,
+    "pick_rate": 0.19,
+    "ban_rate": 0.154
+  },
+  "abaddon": {
+    "localized_name": "Abaddon",
+    "roles": [
+      "Support",
+      "Carry",
+      "Durable"
+    ],
+    "winrate": 0.442,
+    "pick_rate": 0.197,
+    "ban_rate": 0.237
+  },
+  "huskar": {
+    "localized_name": "Huskar",
+    "roles": [
+      "Carry",
+      "Durable",
+      "Initiator"
+    ],
+    "winrate": 0.438,
+    "pick_rate": 0.16,
+    "ban_rate": 0.524
+  },
+  "ogre_magi": {
+    "localized_name": "Ogre Magi",
+    "roles": [
+      "Support",
+      "Nuker",
+      "Disabler",
+      "Durable",
+      "Initiator"
+    ],
+    "winrate": 0.436,
+    "pick_rate": 0.259,
+    "ban_rate": 0.051
+  },
+  "weaver": {
+    "localized_name": "Weaver",
+    "roles": [
+      "Carry",
+      "Escape"
+    ],
+    "winrate": 0.433,
+    "pick_rate": 0.24,
+    "ban_rate": 0.219
+  },
+  "elder_titan": {
+    "localized_name": "Elder Titan",
+    "roles": [
+      "Initiator",
+      "Disabler",
+      "Nuker",
+      "Durable"
+    ],
+    "winrate": 0.433,
+    "pick_rate": 0.03,
+    "ban_rate": 0.041
+  },
+  "dark_willow": {
+    "localized_name": "Dark Willow",
+    "roles": [
+      "Support",
+      "Nuker",
+      "Disabler",
+      "Escape"
+    ],
+    "winrate": 0.431,
+    "pick_rate": 0.411,
+    "ban_rate": 0.303
+  },
+  "tinker": {
+    "localized_name": "Tinker",
+    "roles": [
+      "Carry",
+      "Nuker",
+      "Pusher"
+    ],
+    "winrate": 0.43,
+    "pick_rate": 0.142,
+    "ban_rate": 0.45
+  },
+  "tusk": {
+    "localized_name": "Tusk",
+    "roles": [
+      "Initiator",
+      "Disabler",
+      "Nuker"
+    ],
+    "winrate": 0.427,
+    "pick_rate": 0.356,
+    "ban_rate": 0.195
+  },
+  "visage": {
+    "localized_name": "Visage",
+    "roles": [
+      "Support",
+      "Nuker",
+      "Durable",
+      "Disabler",
+      "Pusher"
+    ],
+    "winrate": 0.426,
+    "pick_rate": 0.047,
+    "ban_rate": 0.108
+  },
+  "chen": {
+    "localized_name": "Chen",
+    "roles": [
+      "Support",
+      "Pusher"
+    ],
+    "winrate": 0.421,
+    "pick_rate": 0.019,
+    "ban_rate": 0.032
+  },
+  "phantom_lancer": {
+    "localized_name": "Phantom Lancer",
+    "roles": [
+      "Carry",
+      "Escape",
+      "Pusher",
+      "Nuker"
+    ],
+    "winrate": 0.392,
+    "pick_rate": 0.097,
+    "ban_rate": 0.088
+  },
+  "sand_king": {
+    "localized_name": "Sand King",
+    "roles": [
+      "Initiator",
+      "Disabler",
+      "Support",
+      "Nuker",
+      "Escape"
+    ],
+    "winrate": 0.392,
+    "pick_rate": 0.079,
+    "ban_rate": 0.091
+  },
+  "meepo": {
+    "localized_name": "Meepo",
+    "roles": [
+      "Carry",
+      "Escape",
+      "Nuker",
+      "Disabler",
+      "Initiator",
+      "Pusher"
+    ],
+    "winrate": 0.387,
+    "pick_rate": 0.031,
+    "ban_rate": 0.111
+  },
+  "techies": {
+    "localized_name": "Techies",
+    "roles": [
+      "Nuker",
+      "Disabler"
+    ],
+    "winrate": 0.386,
+    "pick_rate": 0.083,
+    "ban_rate": 0.163
+  },
+  "bristleback": {
+    "localized_name": "Bristleback",
+    "roles": [
+      "Carry",
+      "Durable",
+      "Initiator",
+      "Nuker"
+    ],
+    "winrate": 0.382,
+    "pick_rate": 0.173,
+    "ban_rate": 0.342
+  },
+  "phantom_assassin": {
+    "localized_name": "Phantom Assassin",
+    "roles": [
+      "Carry",
+      "Escape"
+    ],
+    "winrate": 0.374,
+    "pick_rate": 0.115,
+    "ban_rate": 0.09
+  },
+  "_last_updated": "2025-06-30T15:45:08.009895"
+}

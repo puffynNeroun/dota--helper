@@ -1,5 +1,8 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RecommendationResponse",
   "type": "object",
+  "required": ["recommended_aspect", "builds"],
   "properties": {
     "recommended_aspect": {
       "type": "string",
@@ -7,39 +10,48 @@
     },
     "builds": {
       "type": "array",
+      "minItems": 1,
       "items": {
         "type": "object",
+        "required": [
+          "name",
+          "winrate_score",
+          "build",
+          "starting_items",
+          "skill_build"
+        ],
+        "additionalProperties": false,
         "properties": {
           "name": {
             "type": "string",
-            "description": "Название билда, например 'Маг билд', 'Физический урон', 'Лейт-контроль'"
+            "description": "Название билда"
           },
           "description": {
             "type": "string",
-            "description": "Краткое описание, почему билд выбран, как он работает"
+            "description": "Краткое описание билда"
           },
           "winrate_score": {
             "type": "number",
-            "description": "Оценка билда от 0 до 1 по шансам на победу"
+            "description": "Оценка билда от 0 до 1"
           },
           "highlight": {
             "type": "boolean",
-            "description": "True, если билд является приоритетным"
+            "description": "Приоритетный билд"
           },
           "build": {
             "type": "array",
             "items": { "type": "string" },
-            "description": "Основные предметы билда"
+            "description": "Основные предметы"
           },
           "starting_items": {
             "type": "array",
             "items": { "type": "string" },
-            "description": "Начальные предметы на лайнинг"
+            "description": "Начальные предметы"
           },
           "skill_build": {
             "type": "array",
             "items": { "type": "string" },
-            "description": "Последовательность прокачки скиллов"
+            "description": "Очередность прокачки скиллов"
           },
           "talents": {
             "type": "object",
@@ -57,29 +69,63 @@
               "late_game": { "type": "string" }
             },
             "additionalProperties": false,
-            "description": "Описание стратегии игры на разных этапах"
+            "description": "План на игру"
           },
           "item_notes": {
             "type": "object",
             "additionalProperties": { "type": "string" },
-            "description": "Пояснения к ключевым предметам"
+            "description": "Пояснения к предметам"
           }
-        },
-        "required": [
-          "name",
-          "winrate_score",
-          "build",
-          "starting_items",
-          "skill_build"
-        ],
-        "additionalProperties": false
+        }
+      }
+    },
+    "suggested_heroes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "score"],
+        "properties": {
+          "name": { "type": "string" },
+          "score": { "type": "number" },
+          "reason": { "type": "string" }
+        }
       },
-      "minItems": 1
+      "description": "Рекомендованные герои"
+    },
+    "lane_opponents": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Герои против линии"
+    },
+    "starting_items": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Начальные предметы"
+    },
+    "build_easy": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Билд в лёгкой игре"
+    },
+    "build_even": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Билд в равной игре"
+    },
+    "build_hard": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Билд в тяжёлой игре"
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Предупреждения"
+    },
+    "source": {
+      "type": "string",
+      "description": "Источник: 'openai' или 'fallback'"
     }
   },
-  "required": [
-    "recommended_aspect",
-    "builds"
-  ],
   "additionalProperties": false
 }

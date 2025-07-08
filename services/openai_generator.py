@@ -58,22 +58,25 @@ def build_user_prompt(draft: DraftInput, input_data: Dict) -> str:
         "Проанализируй выбранного героя и его роль в матче. "
         "Подбери оптимальный стиль игры (например, маг, физический урон, контроль, пуш и т.д.).\n"
         "Сгенерируй от 2 до 4 билдов, каждый из которых должен содержать:\n"
-        "- название (name)\n"
-        "- краткое описание (description)\n"
-        "- оценку шанса победы (winrate_score)\n"
-        "- сборку предметов (build)\n"
-        "- стартовые предметы (starting_items)\n"
-        "- прокачку скиллов (skill_build)\n"
-        "- таланты (talents)\n"
-        "- план на игру (game_plan)\n"
-        "- пояснения к предметам (item_notes)\n"
-        "Также добавь ключ 'recommended_aspect' — маг, пуш, инициатор и т.п.\n"
+        "- name\n"
+        "- description\n"
+        "- winrate_score\n"
+        "- build\n"
+        "- starting_items\n"
+        "- skill_build\n"
+        "- talents\n"
+        "- game_plan\n"
+        "- item_notes\n"
+        "Добавь ключ 'recommended_aspect' — маг, пуш, инициатор и т.п.\n"
+        "Если герой не выбран — предложи наиболее подходящих (suggested_heroes).\n"
+        "Обязательно соблюдай JSON-структуру согласно схеме.\n"
+        "Также добавь ключи: lane_opponents, build_easy, build_even, build_hard, starting_items, warnings, source.\n"
         "Ответ СТРОГО в корректном JSON-формате."
     )
     if draft.user_hero:
-        return base + "\nПользователь уже выбрал героя — не предлагай других. Формируй билд только для него."
+        return base + "\nПользователь уже выбрал героя — не предлагай других. Сформируй билд только для него."
     else:
-        return base + "\nЕсли герой не выбран — предложи наиболее подходящего, но тоже сформируй билд."
+        return base + "\nЕсли герой не выбран — предложи наиболее подходящих в ключе 'suggested_heroes'."
 
 
 def validate_openai_json(data: Dict) -> bool:

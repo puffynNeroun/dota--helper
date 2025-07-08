@@ -35,15 +35,16 @@ class HeroSuggestion(BaseModel):
 
 class BuildPlan(BaseModel):
     name: str
-    description: Optional[str] = None
     winrate_score: float
-    highlight: Optional[bool] = False
     build: List[str]
     starting_items: List[str]
-    skill_build: Optional[List[str]] = []
-    talents: Optional[Dict[str, str]] = {}  # e.g., {"10": "+15 damage"}
-    game_plan: Optional[Dict[str, str]] = {}  # e.g., {"early_game": "..."}
-    item_notes: Optional[Dict[str, str]] = {}  # e.g., {"black_king_bar": "Против сильных дизейблов"}
+    skill_build: List[str]
+
+    description: Optional[str] = None
+    highlight: Optional[bool] = False
+    talents: Dict[str, str] = Field(default_factory=dict)
+    game_plan: Dict[str, str] = Field(default_factory=dict)
+    item_notes: Dict[str, str] = Field(default_factory=dict)
 
     class Config:
         schema_extra = {
@@ -72,3 +73,12 @@ class BuildPlan(BaseModel):
 class RecommendationResponse(BaseModel):
     recommended_aspect: str
     builds: List[BuildPlan]
+
+    suggested_heroes: List[HeroSuggestion] = Field(default_factory=list)
+    lane_opponents: List[str] = Field(default_factory=list)
+    starting_items: List[str] = Field(default_factory=list)
+    build_easy: List[str] = Field(default_factory=list)
+    build_even: List[str] = Field(default_factory=list)
+    build_hard: List[str] = Field(default_factory=list)
+    warnings: List[str] = Field(default_factory=list)
+    source: Optional[str] = Field(default=None, description="Источник: 'openai' или 'fallback'")

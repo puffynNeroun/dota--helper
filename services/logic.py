@@ -3,9 +3,13 @@ import logging
 from pathlib import Path
 from typing import List, Set
 
-from models.types import DraftInput, RecommendationResponse, HeroSuggestion
+from models.types import (
+    DraftInput,
+    RecommendationResponse,
+    HeroSuggestion,
+    BuildPlan,
+)
 
-# Настройка логгера
 logger = logging.getLogger(__name__)
 
 # Пути к данным
@@ -44,8 +48,8 @@ def recommend_by_meta(user_role: str, excluded: Set[str], meta: dict) -> List[He
         "carry": ["Carry"],
         "mid": ["Nuker"],
         "offlane": ["Initiator", "Durable"],
-        "pos4": ["Support", "Disabler"],
-        "pos5": ["Support", "Disabler"],
+        "support": ["Support", "Disabler"],
+        "hard support": ["Support", "Disabler"],
     }
 
     normalized_role = user_role.strip().lower()
@@ -73,7 +77,36 @@ def recommend_by_meta(user_role: str, excluded: Set[str], meta: dict) -> List[He
     top = sorted(suggestions, key=lambda h: h["score"], reverse=True)[:3]
     return [HeroSuggestion(**s) for s in top]
 
-# === Генерация полной рекомендации ===
+# === Простая генерация fallback-билда на героя ===
+def generate_simple_build(user_hero: str) -> List[BuildPlan]:
+    return [
+        BuildPlan(
+            name="Базовый билд",
+            description=f"Стандартный билд на {user_hero.title()}",
+            winrate_score=0.52,
+            highlight=True,
+            build=["boots", "magic_wand", "kaya", "bkb"],
+            starting_items=["tango", "branches", "faerie_fire"],
+            skill_build=["Q", "E", "Q", "W", "Q", "R", "Q", "W", "W", "W"],
+            talents={
+                "10": "+20 урона",
+                "15": "+10% spell amp",
+                "20": "+0.3s stun",
+                "25": "+25% magic resistance"
+            },
+            game_plan={
+                "early_game": "Контроль линии и харас врагов.",
+                "mid_game": "Подключение к тимфайтам и пуш лайнов.",
+                "late_game": "Участие в решающих боях, контроль ключевых героев."
+            },
+            item_notes={
+                "kaya": "Увеличивает магический урон.",
+                "bkb": "Необходим против магов и дизейблов."
+            }
+        )
+    ]
+
+# === Финальная генерация рекомендации ===
 def generate_recommendation(draft: DraftInput) -> RecommendationResponse:
     valid_heroes = load_valid_heroes()
     meta = load_meta_data()
@@ -92,11 +125,14 @@ def generate_recommendation(draft: DraftInput) -> RecommendationResponse:
         excluded_heroes.add(user_hero)
 
     suggestions = []
+    builds = []
+    source = None
+
     if not user_hero:
         suggestions = recommend_by_meta(draft.user_role, excluded_heroes, meta)
+        source = "openai"
 
         if not suggestions:
-            # Fallback: выбираем топ-3 героев по винрейту
             fallback = sorted(
                 [
                     {"name": k, "score": v.get("winrate", 0), "reason": "Лучший винрейт вне зависимости от роли"}
@@ -108,13 +144,20 @@ def generate_recommendation(draft: DraftInput) -> RecommendationResponse:
             )[:3]
             suggestions = [HeroSuggestion(**h) for h in fallback]
             warnings.append("⚠️ Не удалось подобрать героев по роли — показаны лучшие по винрейту.")
+            source = "fallback"
+    else:
+        builds = generate_simple_build(user_hero)
+        source = "fallback"
 
     return RecommendationResponse(
+        recommended_aspect=draft.aspect or "общий",
+        builds=builds,
         suggested_heroes=suggestions,
         lane_opponents=clean_enemy[:2],
         starting_items=["tango", "branches", "circlet"],
         build_easy=["boots", "witch_blade", "aghanims_scepter"],
         build_even=["boots", "kaya", "bkb"],
         build_hard=["boots", "euls", "ghost_scepter"],
-        warnings=warnings
+        warnings=warnings,
+        source=source
     )

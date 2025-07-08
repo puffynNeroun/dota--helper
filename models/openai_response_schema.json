@@ -1,0 +1,85 @@
+{
+  "type": "object",
+  "properties": {
+    "recommended_aspect": {
+      "type": "string",
+      "description": "Наиболее подходящий аспект героя для данной игры"
+    },
+    "builds": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Название билда, например 'Маг билд', 'Физический урон', 'Лейт-контроль'"
+          },
+          "description": {
+            "type": "string",
+            "description": "Краткое описание, почему билд выбран, как он работает"
+          },
+          "winrate_score": {
+            "type": "number",
+            "description": "Оценка билда от 0 до 1 по шансам на победу"
+          },
+          "highlight": {
+            "type": "boolean",
+            "description": "True, если билд является приоритетным"
+          },
+          "build": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Основные предметы билда"
+          },
+          "starting_items": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Начальные предметы на лайнинг"
+          },
+          "skill_build": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Последовательность прокачки скиллов"
+          },
+          "talents": {
+            "type": "object",
+            "patternProperties": {
+              "^(10|15|20|25)$": { "type": "string" }
+            },
+            "additionalProperties": false,
+            "description": "Выбор талантов на уровнях"
+          },
+          "game_plan": {
+            "type": "object",
+            "properties": {
+              "early_game": { "type": "string" },
+              "mid_game": { "type": "string" },
+              "late_game": { "type": "string" }
+            },
+            "additionalProperties": false,
+            "description": "Описание стратегии игры на разных этапах"
+          },
+          "item_notes": {
+            "type": "object",
+            "additionalProperties": { "type": "string" },
+            "description": "Пояснения к ключевым предметам"
+          }
+        },
+        "required": [
+          "name",
+          "winrate_score",
+          "build",
+          "starting_items",
+          "skill_build"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "recommended_aspect",
+    "builds"
+  ],
+  "additionalProperties": false
+}

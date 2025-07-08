@@ -8,3 +8,5 @@ openai
 numpy
 apscheduler
 requests
+slowapi
+jsonschema

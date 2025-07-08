@@ -1,6 +1,11 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query, Request
 from models.types import DraftInput, RecommendationResponse
 from services.logic import generate_recommendation
+from services.openai_generator import generate_openai_recommendation
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+from slowapi import Limiter
+
 import logging
 
 router = APIRouter(
@@ -8,45 +13,53 @@ router = APIRouter(
     tags=["recommendation"]
 )
 
+limiter = Limiter(key_func=get_remote_address)
+
 @router.post(
     "/recommend",
     response_model=RecommendationResponse,
     summary="🎯 Рекомендация героя и билда для текущего драфта",
     response_description="Предложение героев, стартовых предметов и билдов с учётом линии"
 )
-async def recommend_team(draft: DraftInput):
-    """
-    🧠 Анализирует текущий драфт в Dota 2 и предлагает оптимального героя и билд.
+@limiter.limit("5/minute")  # Ограничение: 5 запросов в минуту с одного IP
+async def recommend_team(
+    request: Request,
+    draft: DraftInput,
+    use_openai: bool = Query(
+        default=True,
+        description="Использовать ли AI (OpenAI) для генерации рекомендаций"
+    )
+):
 
-    ### Обязательные поля:
-    - **user_role**: Ваша роль (например, Mid, Support, Carry и т.д.)
+    client_ip = get_remote_address(request)
+    logging.info(f"Запрос от IP {client_ip} | use_openai: {use_openai}")
 
-    ### Необязательные поля:
-    - **user_hero**: Герой, за которого вы планируете играть
-    - **ally_heroes**: Список героев вашей команды (до 4)
-    - **enemy_heroes**: Список героев соперников (до 5)
-
-    ### Что возвращается:
-    - Топ-3 героя, рекомендуемых системой (если не выбран пользовательский герой)
-    - Противники по линии (2 первых врага)
-    - Стартовые предметы
-    - Билды для лёгкой, равной и тяжёлой игры
-    - Предупреждения по входным данным
-    """
     try:
-        logging.info("🔍 Получен драфт: %s", draft.dict())
-        result = generate_recommendation(draft)
-        logging.info("✅ Сформирована рекомендация: %s", result)
+        logging.info("Получен драфт: %s", draft.dict())
+
+        if use_openai:
+            logging.info("Генерация через OpenAI")
+            try:
+                result = generate_openai_recommendation(draft)
+            except Exception as ai_error:
+                logging.warning("Ошибка OpenAI: %s", ai_error)
+                logging.info("Переход на мета-логику")
+                result = generate_recommendation(draft)
+        else:
+            logging.info("Генерация через мета-логику")
+            result = generate_recommendation(draft)
+
+        logging.info("Рекомендация сформирована")
         return result
 
     except ValueError as ve:
-        logging.warning("⚠️ Ошибка валидации входных данных: %s", ve)
+        logging.warning("Ошибка валидации: %s", ve)
         raise HTTPException(status_code=400, detail=str(ve))
 
     except FileNotFoundError as fnf:
-        logging.error("📁 Отсутствует файл данных: %s", fnf)
-        raise HTTPException(status_code=500, detail="Файл с мета-данными не найден. Повторите позже.")
+        logging.error("Файл не найден: %s", fnf)
+        raise HTTPException(status_code=500, detail="Файл с мета-данными не найден.")
 
     except Exception as e:
-        logging.critical("💥 Неожиданная ошибка при генерации рекомендации: %s", e, exc_info=True)
-        raise HTTPException(status_code=500, detail="Внутренняя ошибка сервера при генерации рекомендации.")
+        logging.critical("Критическая ошибка: %s", e, exc_info=True)
+        raise HTTPException(status_code=500, detail="Внутренняя ошибка сервера.")

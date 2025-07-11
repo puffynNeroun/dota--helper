@@ -8,76 +8,77 @@ from models.types import (
     RecommendationResponse,
     HeroSuggestion,
     BuildPlan,
+    BuildVariant,
+    BuildOptionsRequest,
+    BuildOptionsResponse,
+    DetailedBuildRequest,
+    DetailedBuildResponse,
 )
 
 logger = logging.getLogger(__name__)
 
-# Пути к данным
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 HEROES_PATH = DATA_DIR / "heroes.json"
 META_PATH = DATA_DIR / "meta.json"
 
-# === Загрузка списка допустимых героев ===
+
 def load_valid_heroes() -> Set[str]:
     if not HEROES_PATH.exists():
-        raise FileNotFoundError(f"Файл {HEROES_PATH} не найден. Обнови его через скрипт meta_loader.")
+        raise FileNotFoundError(f"Файл {HEROES_PATH} не найден. Обнови через meta_loader.")
     with open(HEROES_PATH, encoding="utf-8") as f:
         return {hero["name"].lower() for hero in json.load(f)}
 
-# === Загрузка мета-данных ===
+
 def load_meta_data() -> dict:
     if not META_PATH.exists():
-        raise FileNotFoundError(f"Файл {META_PATH} не найден. Запусти meta_loader.py.")
+        raise FileNotFoundError(f"Файл {META_PATH} не найден. Запусти meta_loader.")
     with open(META_PATH, encoding="utf-8") as f:
         return json.load(f)
 
-# === Очистка и валидация списков героев ===
-def clean_heroes(raw_list: List[str], valid_heroes: Set[str], max_len: int, role: str) -> List[str]:
-    cleaned = []
-    for h in raw_list:
-        h_clean = h.lower()
-        if h_clean in valid_heroes and h_clean not in cleaned:
-            cleaned.append(h_clean)
-        else:
-            logger.warning(f"⚠️ Герой '{h}' не распознан и исключён из списка {role}.")
-    return cleaned[:max_len]
 
-# === Подбор героев по мете и роли ===
+def clean_heroes(raw: List[str], valid: Set[str], max_len: int, role: str) -> List[str]:
+    result = []
+    for h in raw:
+        h_l = h.lower()
+        if h_l in valid and h_l not in result:
+            result.append(h_l)
+        else:
+            logger.warning(f"⚠️ Герой '{h}' не найден и исключён из списка {role}.")
+    return result[:max_len]
+
+
 def recommend_by_meta(user_role: str, excluded: Set[str], meta: dict) -> List[HeroSuggestion]:
     role_map = {
         "carry": ["Carry"],
         "mid": ["Nuker"],
+        "safelane": ["Carry"],
         "offlane": ["Initiator", "Durable"],
         "support": ["Support", "Disabler"],
         "hard support": ["Support", "Disabler"],
     }
-
-    normalized_role = user_role.strip().lower()
-    target_roles = role_map.get(normalized_role)
-
-    if not target_roles:
-        logger.warning(f"⚠️ Роль '{user_role}' не распознана. Подбор невозможен.")
+    role_norm = user_role.strip().lower()
+    mapped = role_map.get(role_norm)
+    if not mapped:
+        logger.warning(f"⚠️ Роль '{user_role}' не распознана.")
         return []
 
-    logger.info(f"🎯 Подбор героев для клиентской роли '{normalized_role}' через: {target_roles}")
-
-    suggestions = []
+    logger.info(f"🎯 Поиск героев по ролям {mapped}")
+    candidates = []
     for name, info in meta.items():
         if name.startswith("_") or name in excluded:
             continue
-
         hero_roles = [r.lower() for r in info.get("roles", [])]
-        if any(role.lower() in hero_roles for role in target_roles):
-            suggestions.append({
+        if any(r.lower() in hero_roles for r in mapped):
+            candidates.append({
                 "name": name,
                 "score": info.get("winrate", 0),
-                "reason": f"Рекомендован для роли {normalized_role}"
+                "reason": f"Рекомендован для роли {role_norm}"
             })
 
-    top = sorted(suggestions, key=lambda h: h["score"], reverse=True)[:3]
+    top = sorted(candidates, key=lambda h: h["score"], reverse=True)[:3]
     return [HeroSuggestion(**s) for s in top]
 
-# === Простая генерация fallback-билда на героя ===
+
 def generate_simple_build(user_hero: str) -> List[BuildPlan]:
     return [
         BuildPlan(
@@ -97,7 +98,7 @@ def generate_simple_build(user_hero: str) -> List[BuildPlan]:
             game_plan={
                 "early_game": "Контроль линии и харас врагов.",
                 "mid_game": "Подключение к тимфайтам и пуш лайнов.",
-                "late_game": "Участие в решающих боях, контроль ключевых героев."
+                "late_game": "Решающие бои и контроль ключевых героев."
             },
             item_notes={
                 "kaya": "Увеличивает магический урон.",
@@ -106,7 +107,7 @@ def generate_simple_build(user_hero: str) -> List[BuildPlan]:
         )
     ]
 
-# === Финальная генерация рекомендации ===
+
 def generate_recommendation(draft: DraftInput) -> RecommendationResponse:
     valid_heroes = load_valid_heroes()
     meta = load_meta_data()
@@ -120,29 +121,27 @@ def generate_recommendation(draft: DraftInput) -> RecommendationResponse:
         warnings.append(f"⚠️ Герой '{user_hero}' не найден в базе. Игнорируется.")
         user_hero = None
 
-    excluded_heroes = set(clean_enemy + clean_ally)
+    excluded = set(clean_enemy + clean_ally)
     if user_hero:
-        excluded_heroes.add(user_hero)
+        excluded.add(user_hero)
 
-    suggestions = []
-    builds = []
-    source = None
+    suggestions, builds, source = [], [], None
 
     if not user_hero:
-        suggestions = recommend_by_meta(draft.user_role, excluded_heroes, meta)
+        suggestions = recommend_by_meta(draft.user_role, excluded, meta)
         source = "openai"
 
         if not suggestions:
             fallback = sorted(
                 [
-                    {"name": k, "score": v.get("winrate", 0), "reason": "Лучший винрейт вне зависимости от роли"}
-                    for k, v in meta.items()
-                    if k not in excluded_heroes and not k.startswith("_")
+                    {"name": name, "score": info.get("winrate", 0), "reason": "Лучший винрейт вне зависимости от роли"}
+                    for name, info in meta.items()
+                    if name not in excluded and not name.startswith("_")
                 ],
                 key=lambda h: h["score"],
                 reverse=True
             )[:3]
-            suggestions = [HeroSuggestion(**h) for h in fallback]
+            suggestions = [HeroSuggestion(**f) for f in fallback]
             warnings.append("⚠️ Не удалось подобрать героев по роли — показаны лучшие по винрейту.")
             source = "fallback"
     else:
@@ -160,4 +159,43 @@ def generate_recommendation(draft: DraftInput) -> RecommendationResponse:
         build_hard=["boots", "euls", "ghost_scepter"],
         warnings=warnings,
         source=source
+    )
+
+
+def fallback_build_options(_: BuildOptionsRequest) -> List[BuildVariant]:
+    return [
+        BuildVariant(id="default_magic", label="Маг", description="Фокус на AoE урон и контроль"),
+        BuildVariant(id="default_right_click", label="Физ. урон", description="Через быстрый урон и криты"),
+        BuildVariant(id="default_aura", label="Аура и поддержка", description="Через предметы ауры и командный импакт")
+    ]
+
+
+def fallback_detailed_build(
+    hero: str,
+    role: str,
+    aspect: str,
+    enemy_lane_heroes: List[str],
+    team_heroes: List[str],
+    selected_build_id: str
+) -> DetailedBuildResponse:
+    return DetailedBuildResponse(
+        starting_items=["tango", "mantle_of_intelligence", "circlet"],
+        early_game_items=["boots", "null_talisman"],
+        mid_game_items=["aether_lens", "kaya"],
+        late_game_items=["bkb", "octarine_core"],
+        situational_items=["ghost_scepter", "glimmer_cape"],
+        skill_build=["Q", "E", "Q", "W", "Q", "R", "Q", "W", "W", "W", "R", "E", "E", "E", "Stats", "R"],
+        talents={"10": "+15% spell amp", "15": "+100 cast range"},
+        game_plan={
+            "early_game": "Держись позади, фарми с безопасной дистанции.",
+            "mid_game": "Контроль карты, сплитпуш и поддержка тимфайтов.",
+            "late_game": "Максимальный импакт за счёт позиционки и предметов контроля."
+        },
+        item_explanations={
+            "bkb": "Обязателен против магического контроля.",
+            "aether_lens": "Повышает дальность применения способностей.",
+            "octarine_core": "Снижение КД и выживаемость."
+        },
+        warnings=["⚠️ Данные сгенерированы fallback-логикой, не основаны на OpenAI."],
+        source="fallback"
     )

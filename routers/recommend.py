@@ -8,7 +8,7 @@ from slowapi import Limiter
 
 import logging
 
-# Настройка логгера
+# === Настройка логгера ===
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
@@ -17,7 +17,7 @@ router = APIRouter(
     tags=["recommendation"]
 )
 
-# Инициализация лимитера (ограничение по IP)
+# === Ограничение по IP ===
 limiter = Limiter(key_func=get_remote_address)
 
 @router.post(
@@ -26,10 +26,11 @@ limiter = Limiter(key_func=get_remote_address)
     response_model_exclude_none=True,
     summary="🎯 Рекомендация героя и билда для текущего драфта",
     description=(
-        "Анализирует текущий драфт с учётом героев противников, союзников и выбранной роли пользователя. "
-        "Возвращает наиболее подходящий билд, героев, стартовые предметы, таланты и стратегию на игру."
+        "Анализирует текущий драфт: союзники, противники, роль и аспект. "
+        "Возвращает наиболее подходящего героя, билд, стартовые предметы, стратегию по таймингам, таланты и пояснения. "
+        "На основе открытых данных (Dotabuff, Pro Tracker и др.), адаптированных под текущую ситуацию."
     ),
-    response_description="Подробная рекомендация по билду, героям и плану игры"
+    response_description="Подробная рекомендация с билдом и планом игры"
 )
 @limiter.limit("5/minute")
 async def recommend_team(
@@ -37,38 +38,38 @@ async def recommend_team(
     draft: DraftInput,
     use_openai: bool = Query(
         default=True,
-        description="Использовать ли OpenAI для генерации рекомендаций"
+        description="Использовать ли OpenAI для интеллектуальной адаптации билдов"
     )
 ):
     client_ip = get_remote_address(request)
-    logger.info(f"[{client_ip}] Запрос получен | use_openai={use_openai}")
+    logger.info(f"[{client_ip}] Запрос на рекомендацию | OpenAI={use_openai}")
 
     try:
-        logger.info("Получен драфт: %s", draft.model_dump())
+        logger.info("📥 Драфт: %s", draft.model_dump())
 
         if use_openai:
-            logger.info("Генерация рекомендаций через OpenAI")
+            logger.info("🧠 Используется OpenAI как адаптер билдов")
             try:
                 result = generate_openai_recommendation(draft)
             except Exception as ai_error:
-                logger.warning("OpenAI ошибка: %s", ai_error)
-                logger.info("Переход на fallback-логику")
+                logger.warning("⚠️ OpenAI упал: %s", ai_error)
+                logger.info("⛑️ Переход на fallback-логику")
                 result = generate_recommendation(draft)
         else:
-            logger.info("Генерация через fallback-логику")
+            logger.info("🔧 Используется fallback логика без OpenAI")
             result = generate_recommendation(draft)
 
-        logger.info("Рекомендация успешно сформирована")
+        logger.info("✅ Рекомендация готова")
         return result
 
     except ValueError as ve:
-        logger.warning("Ошибка валидации входных данных: %s", ve)
+        logger.warning("❌ Неверные входные данные: %s", ve)
         raise HTTPException(status_code=400, detail=str(ve))
 
     except FileNotFoundError as fnf:
-        logger.error("Отсутствует файл с мета-данными: %s", fnf)
+        logger.error("📂 meta.json не найден: %s", fnf)
         raise HTTPException(status_code=500, detail="Файл с мета-данными не найден.")
 
     except Exception as e:
-        logger.critical("Критическая ошибка: %s", e, exc_info=True)
+        logger.critical("🔥 Необработанная ошибка: %s", e, exc_info=True)
         raise HTTPException(status_code=500, detail="Внутренняя ошибка сервера.")

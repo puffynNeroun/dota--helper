@@ -2,130 +2,159 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "RecommendationResponse",
   "type": "object",
-  "required": ["recommended_aspect", "builds"],
+  "required": ["recommended_aspect", "builds", "source"],
+  "additionalProperties": false,
   "properties": {
     "recommended_aspect": {
       "type": "string",
       "description": "Наиболее подходящий аспект героя для данной игры"
     },
-    "builds": {
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "type": "object",
-        "required": [
-          "name",
-          "winrate_score",
-          "build",
-          "starting_items",
-          "skill_build"
-        ],
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Название билда"
-          },
-          "description": {
-            "type": "string",
-            "description": "Краткое описание билда"
-          },
-          "winrate_score": {
-            "type": "number",
-            "description": "Оценка билда от 0 до 1"
-          },
-          "highlight": {
-            "type": "boolean",
-            "description": "Приоритетный билд"
-          },
-          "build": {
-            "type": "array",
-            "items": { "type": "string" },
-            "description": "Основные предметы"
-          },
-          "starting_items": {
-            "type": "array",
-            "items": { "type": "string" },
-            "description": "Начальные предметы"
-          },
-          "skill_build": {
-            "type": "array",
-            "items": { "type": "string" },
-            "description": "Очередность прокачки скиллов"
-          },
-          "talents": {
-            "type": "object",
-            "patternProperties": {
-              "^(10|15|20|25)$": { "type": "string" }
-            },
-            "additionalProperties": false,
-            "description": "Выбор талантов на уровнях"
-          },
-          "game_plan": {
-            "type": "object",
-            "properties": {
-              "early_game": { "type": "string" },
-              "mid_game": { "type": "string" },
-              "late_game": { "type": "string" }
-            },
-            "additionalProperties": false,
-            "description": "План на игру"
-          },
-          "item_notes": {
-            "type": "object",
-            "additionalProperties": { "type": "string" },
-            "description": "Пояснения к предметам"
-          }
-        }
-      }
-    },
     "suggested_heroes": {
       "type": "array",
+      "description": "Рекомендованные герои (если герой не выбран)",
       "items": {
         "type": "object",
         "required": ["name", "score"],
+        "additionalProperties": false,
         "properties": {
           "name": { "type": "string" },
           "score": { "type": "number" },
           "reason": { "type": "string" }
         }
-      },
-      "description": "Рекомендованные герои"
+      }
     },
     "lane_opponents": {
       "type": "array",
-      "items": { "type": "string" },
-      "description": "Герои против линии"
+      "description": "Герои против линии",
+      "items": { "type": "string" }
     },
     "starting_items": {
       "type": "array",
-      "items": { "type": "string" },
-      "description": "Начальные предметы"
+      "description": "Начальные предметы (в корне)",
+      "items": { "type": "string" }
     },
-    "build_easy": {
+    "early_game_items": {
       "type": "array",
-      "items": { "type": "string" },
-      "description": "Билд в лёгкой игре"
+      "description": "Предметы ранней игры",
+      "items": { "type": "string" }
     },
-    "build_even": {
+    "mid_game_items": {
       "type": "array",
-      "items": { "type": "string" },
-      "description": "Билд в равной игре"
+      "description": "Предметы средней стадии",
+      "items": { "type": "string" }
     },
-    "build_hard": {
+    "late_game_items": {
       "type": "array",
-      "items": { "type": "string" },
-      "description": "Билд в тяжёлой игре"
+      "description": "Предметы поздней стадии",
+      "items": { "type": "string" }
+    },
+    "situational_items": {
+      "type": "array",
+      "description": "Ситуативные предметы",
+      "items": { "type": "string" }
+    },
+    "item_explanations": {
+      "type": "object",
+      "description": "Пояснения к предметам",
+      "additionalProperties": { "type": "string" }
     },
     "warnings": {
       "type": "array",
-      "items": { "type": "string" },
-      "description": "Предупреждения"
+      "description": "Предупреждения по пику/матчу",
+      "items": { "type": "string" }
+    },
+    "skill_build": {
+      "type": "array",
+      "description": "Очередность прокачки скиллов (в корне)",
+      "items": { "type": "string" }
+    },
+    "talents": {
+      "type": "object",
+      "description": "Выбор талантов (в корне)",
+      "patternProperties": {
+        "^(10|15|20|25)$": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "game_plan": {
+      "type": "object",
+      "description": "План на игру (в корне)",
+      "properties": {
+        "early_game": { "type": "string" },
+        "mid_game": { "type": "string" },
+        "late_game": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "builds": {
+      "type": "array",
+      "description": "Список билдов",
+      "items": {
+        "type": "object",
+        "required": ["name", "winrate_score", "build", "starting_items", "skill_build"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Название билда (уникальный ключ, например build_even)"
+          },
+          "winrate_score": {
+            "type": "number",
+            "description": "Оценка билда от 0 до 1"
+          },
+          "build": {
+            "type": "array",
+            "description": "Основные предметы в билде",
+            "items": { "type": "string" }
+          },
+          "starting_items": {
+            "type": "array",
+            "description": "Начальные предметы в конкретном билде",
+            "items": { "type": "string" }
+          },
+          "skill_build": {
+            "type": "array",
+            "description": "Очередность прокачки умений",
+            "items": { "type": "string" }
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание билда"
+          },
+          "highlight": {
+            "type": "boolean",
+            "description": "Является ли билд рекомендуемым"
+          },
+          "talents": {
+            "type": "object",
+            "description": "Выбор талантов для билда",
+            "patternProperties": {
+              "^(10|15|20|25)$": { "type": "string" }
+            },
+            "additionalProperties": false
+          },
+          "game_plan": {
+            "type": "object",
+            "description": "План на игру в рамках этого билда",
+            "properties": {
+              "early_game": { "type": "string" },
+              "mid_game": { "type": "string" },
+              "late_game": { "type": "string" }
+            },
+            "additionalProperties": false
+          },
+          "item_explanations": {
+            "type": "object",
+            "description": "Пояснения к предметам в билде",
+            "additionalProperties": { "type": "string" }
+          }
+        }
+      }
     },
     "source": {
       "type": "string",
-      "description": "Источник: 'openai' или 'fallback'"
+      "enum": ["openai", "fallback"],
+      "description": "Источник генерации: openai или fallback"
     }
-  },
-  "additionalProperties": false
+  }
 }

@@ -1,31 +1,34 @@
+import os
+import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import recommend
-from services.scheduler import start_scheduler
 from dotenv import load_dotenv
-import logging
-import os
+from routers import recommend, builds
+from services.scheduler import start_scheduler
 
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
-# Загрузка переменных окружения
+# === Загрузка .env ===
 load_dotenv()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-# Печать API-ключа (для отладки, отключи в продакшене)
-print("API KEY LOADED:", os.getenv("OPENAI_API_KEY"))
-
-# Настройка логирования
+# === Логирование ===
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
 )
 
-# Настройка лимитера запросов
+if not OPENAI_API_KEY:
+    logging.warning("❌ OPENAI_API_KEY is not set or invalid!")
+else:
+    logging.info("✅ OPENAI_API_KEY loaded.")
+
+# === Ограничение скорости запросов ===
 limiter = Limiter(key_func=get_remote_address)
 
-# Инициализация FastAPI-приложения
+# === Инициализация FastAPI ===
 app = FastAPI(
     title="Dota 2 AI Assistant",
     description="Интеллектуальный API для рекомендаций героев и билдов на основе драфта и мета-данных.",
@@ -34,32 +37,32 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
-# Подключение лимитера и обработчика превышения лимитов
+# === Middleware ===
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# Настройка CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        "https://твойдомен.ру"
+        "https://твойдомен.ру",  # заменишь на боевой фронт
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Подключение маршрутов
+# === Роутеры ===
 app.include_router(recommend.router)
+app.include_router(builds.router)
 
-# Запуск планировщика задач при старте приложения
+# === Планировщик задач ===
 @app.on_event("startup")
 def on_startup():
-    logging.info("API и планировщик запущены.")
+    logging.info("🚀 API запущен. Планировщик задач активирован.")
     start_scheduler()
 
-# Endpoint для проверки доступности сервиса
+# === Health Check ===
 @app.get("/", tags=["health"])
 async def root():
     return {

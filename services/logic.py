@@ -10,8 +10,6 @@ from models.types import (
     BuildPlan,
     BuildVariant,
     BuildOptionsRequest,
-    BuildOptionsResponse,
-    DetailedBuildRequest,
     DetailedBuildResponse,
 )
 
@@ -79,31 +77,23 @@ def recommend_by_meta(user_role: str, excluded: Set[str], meta: dict) -> List[He
     return [HeroSuggestion(**s) for s in top]
 
 
-def generate_simple_build(user_hero: str) -> List[BuildPlan]:
+def generate_simple_build(user_hero: str, meta: dict) -> List[BuildPlan]:
+    hero_data = meta.get(user_hero)
+    if not hero_data:
+        return []
+
     return [
         BuildPlan(
             name="Базовый билд",
-            description=f"Стандартный билд на {user_hero.title()}",
-            winrate_score=0.52,
+            description=f"Сгенерировано на основе меты для {user_hero.title()}",
+            winrate_score=hero_data.get("winrate", 0.5),
             highlight=True,
-            build=["boots", "magic_wand", "kaya", "bkb"],
+            build=hero_data.get("popular_items", ["boots", "magic_wand", "kaya", "bkb"]),
             starting_items=["tango", "branches", "faerie_fire"],
-            skill_build=["Q", "E", "Q", "W", "Q", "R", "Q", "W", "W", "W"],
-            talents={
-                "10": "+20 урона",
-                "15": "+10% spell amp",
-                "20": "+0.3s stun",
-                "25": "+25% magic resistance"
-            },
-            game_plan={
-                "early_game": "Контроль линии и харас врагов.",
-                "mid_game": "Подключение к тимфайтам и пуш лайнов.",
-                "late_game": "Решающие бои и контроль ключевых героев."
-            },
-            item_notes={
-                "kaya": "Увеличивает магический урон.",
-                "bkb": "Необходим против магов и дизейблов."
-            }
+            skill_build=hero_data.get("popular_skills", ["Q", "E", "Q", "W", "Q", "R", "Q", "W", "W", "W"]),
+            talents=hero_data.get("talents", {}),
+            game_plan=hero_data.get("game_plan", {}),
+            item_notes=hero_data.get("item_notes", {})
         )
     ]
 
@@ -129,7 +119,7 @@ def generate_recommendation(draft: DraftInput) -> RecommendationResponse:
 
     if not user_hero:
         suggestions = recommend_by_meta(draft.user_role, excluded, meta)
-        source = "openai"
+        source = "meta"
 
         if not suggestions:
             fallback = sorted(
@@ -145,8 +135,8 @@ def generate_recommendation(draft: DraftInput) -> RecommendationResponse:
             warnings.append("⚠️ Не удалось подобрать героев по роли — показаны лучшие по винрейту.")
             source = "fallback"
     else:
-        builds = generate_simple_build(user_hero)
-        source = "fallback"
+        builds = generate_simple_build(user_hero, meta)
+        source = "meta"
 
     return RecommendationResponse(
         recommended_aspect=draft.aspect or "общий",

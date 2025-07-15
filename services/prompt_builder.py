@@ -1,46 +1,61 @@
+import os
 from pathlib import Path
-from typing import Optional
+from typing import Dict
+
 from models.types import DraftInput
 
+PROMPT_DIR = Path(__file__).parent.parent / "prompts"
 
 class PromptBuilder:
     def __init__(self):
         self.templates = {
-            "base": self._read("prompt_base.txt"),
-            "skills": self._read("prompt_skills.txt"),
-            "items": self._read("prompt_items.txt"),
-            "strategy": self._read("prompt_strategy.txt"),
-            "lane": self._read("prompt_lane.txt"),
+            "base": self._load_template("prompt_base.txt"),
+            "lane": self._load_template("prompt_lane.txt"),
+            "items": self._load_template("prompt_items.txt"),
+            "skills": self._load_template("prompt_skills.txt"),
+            "strategy": self._load_template("prompt_strategy.txt"),
         }
 
-    def _read(self, filename: str) -> str:
-        path = Path("prompts") / filename
+    def _load_template(self, filename: str) -> str:
+        path = PROMPT_DIR / filename
         if not path.exists():
-            return f"# WARNING: {filename} not found."
-        return path.read_text(encoding="utf-8").strip()
+            raise FileNotFoundError(f"❌ Prompt file not found: {path}")
+        return path.read_text(encoding="utf-8")
 
     def build_recommend_prompt(self, draft: DraftInput) -> str:
-        parts = [
-            self.templates["base"],
-            f"\n---\n🎯 Роль игрока: {draft.user_role}",
-            f"🛡️ Союзники: {', '.join(draft.ally_heroes)}",
-            f"⚔️ Противники: {', '.join(draft.enemy_heroes)}",
-        ]
+        """
+        Формирует промпт на основе DraftInput для генерации рекомендованных героев.
+        """
+        enemy = ", ".join(draft.enemy_heroes)
+        allies = ", ".join(draft.ally_heroes)
+        role = draft.user_role
+        aspect = draft.aspect or "universal"
 
-        if draft.user_hero:
-            parts.append(f"🧙 Пользователь уже выбрал героя: {draft.user_hero}. Не предлагай других.")
-        else:
-            parts.append("🔍 Герой не выбран. Предложи 3 лучших кандидата с кратким объяснением.")
+        return (
+            f"Ты — опытный аналитик по Dota 2.\n"
+            f"Выбери сильных героев против: {enemy}\n"
+            f"Учитывай союзников: {allies}\n"
+            f"Роль: {role}\n"
+            f"Аспект: {aspect}\n\n"
+            f"Верни JSON с:\n"
+            f"- recommended_aspect (string)\n"
+            f"- suggested_heroes (array из name, score, reason)\n"
+            f"- lane_opponents (array)\n"
+            f"- source: 'openai'\n"
+        )
 
-        if draft.aspect:
-            parts.append(f"🔮 Аспект предпочтения: {draft.aspect}")
+    def build_items_prompt(self, hero: str, aspect: str) -> str:
+        return self.templates["items"].format(hero=hero, aspect=aspect)
 
-        parts.append("---")
-        parts.extend([
-            self.templates["skills"],
-            self.templates["items"],
-            self.templates["strategy"],
-            self.templates["lane"]
-        ])
+    def build_lane_prompt(self, hero: str, enemies: list) -> str:
+        enemy_list = ", ".join(enemies)
+        return self.templates["lane"].format(hero=hero, enemies=enemy_list)
 
-        return "\n\n".join(parts)
+    def build_skills_prompt(self, hero: str) -> str:
+        return self.templates["skills"].format(hero=hero)
+
+    def build_strategy_prompt(self, hero: str, allies: list, enemies: list) -> str:
+        allies_str = ", ".join(allies)
+        enemies_str = ", ".join(enemies)
+        return self.templates["strategy"].format(hero=hero, allies=allies_str, enemies=enemies_str)
+

@@ -10,3 +10,4 @@ apscheduler
 requests
 slowapi
 jsonschema
+pytest

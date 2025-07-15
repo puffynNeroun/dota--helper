@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field, validator
 # ===== Constants =====
 
 VALID_ROLES = {"mid", "safelane", "offlane", "support", "hard support"}
-SOURCE_ENUM = Literal["openai", "fallback"]
+SOURCE_ENUM = Literal["openai", "fallback", "meta"]
 
 # ===== Draft Input =====
 
@@ -62,7 +62,7 @@ class RecommendationResponse(BaseModel):
     build_even: List[str] = Field(default_factory=list)
     build_hard: List[str] = Field(default_factory=list)
     warnings: List[str] = Field(default_factory=list)
-    builds: List[BuildPlan] = Field(default_factory=list)
+    builds: Optional[List[BuildPlan]] = Field(default_factory=list)
     source: SOURCE_ENUM
 
 # ===== Build Options (/builds/options) =====
